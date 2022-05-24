@@ -418,8 +418,20 @@ if (PlayState.SONG.song.toLowerCase()=='idk-love' || PlayState.SONG.song.toLower
 			startDialogue();
 			dialogueStarted = true;
 		}
+                #if mobile
+		var justTouched:Bool = false;
 
-		if (PlayerSettings.player1.controls.ACCEPT && dialogueStarted == true)
+		for (touch in FlxG.touches.list)
+		{
+			justTouched = false;
+			
+			if (touch.justReleased){
+				justTouched = true;
+			}
+		}
+		#end
+			
+		if (FlxG.keys.justPressed.ANY #if mobile || justTouched #end && dialogueStarted == true)
 		{
 			remove(dialogue);
 				
